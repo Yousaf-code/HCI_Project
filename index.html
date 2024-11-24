@@ -8,41 +8,35 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar -->
       <div class="col-auto">
         <div class="sidebar">
-          <a href="profile.html" class="sidebar-item text-decoration-none text-dark">👤</a>
-          <a href="community.html" class="sidebar-item text-decoration-none text-dark">🌐</a>
-          <a href="calendar.html" class="sidebar-item text-decoration-none text-dark">📅</a>
-          <a href="nutrition.html" class="sidebar-item text-decoration-none text-dark">📋</a>
-          <a href="help.html" class="sidebar-item question-mark text-decoration-none text-dark">❓</a>
+          <div class="sidebar-item">👤</div>
+          <div class="sidebar-item">🌐</div>
+          <div class="sidebar-item">📅</div>
+          <div class="sidebar-item">📋</div>
+          <div class="sidebar-item question-mark">❓</div>
         </div>
       </div>
 
       <!-- Main Content -->
       <div class="col">
         <!-- Search Input -->
-        <div class="my-3">
+        <div class="my-3" style="width: 80%;">
           <input type="text" class="form-control" placeholder="Search" />
         </div>
         
         <!-- Video Area -->
-        <div class="bg-light mb-3 p-3" style="height: 300px;">
+        <div class="bg-light mb-3 p-3" style="height: 50%; width: 80%;">
           <div class="d-flex justify-content-center align-items-center h-100">
-            <div class="w-100">
-              <div class="progress mt-3" style="height: 5px;">
-                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
           </div>
         </div>
         
         <!-- Bookmarked Videos -->
         <h5>Bookmarked Videos</h5>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between" style="height: 30%; width: 80%;">
           <!-- First Thumbnail -->
           <div class="video-card w-100 me-2">
             <img src="https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2021-12/211208-working-out-stock-mn-1310-55e1c7.jpg" class="img-fluid" alt="Workout Thumbnail">
