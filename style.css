@@ -56,3 +56,14 @@ body {
   height: 100%;
   width: 100%;
 }
+
+/* Move container.mt-4 up */
+.container.mt-4 {
+  position: absolute;
+  top: 60%; /* Adjust this value to move the form up or down */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Ensure it stays centered horizontally */
+  width: 100%;
+  max-width: 600px; /* Optional: Set a max width to avoid it stretching too much */
+  padding-top: 20px; /* Optional: Add some padding if you need space from the top */
+}
