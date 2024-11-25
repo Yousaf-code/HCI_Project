@@ -120,3 +120,22 @@ img.rounded-circle {
     position: relative;
     top: 20px; /* Moves the container down by 20px */
 }
+/* Nutrition Page Customizations */
+.nutrition-section {
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+/* Background Colors for Consistency */
+.bg-warning {
+  background-color: #FFD54F !important;
+}
+
+.bg-info {
+  background-color: #29B6F6 !important;
+}
+
+.bg-primary {
+  background-color: #1E88E5 !important;
+}
