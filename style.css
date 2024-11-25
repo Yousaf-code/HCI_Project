@@ -151,3 +151,106 @@ img.rounded-circle {
 .bg-primary {
   background-color: #1E88E5 !important;
 }
+/* Chat Canvas Styling */
+.chat-canvas {
+  height: 70vh; /* Takes most of the viewport */
+  overflow-y: auto; /* Scrollable */
+  background-color: #FFFFFF; /* Light background for better contrast */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+/* Individual Chat Message */
+.chat-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #F8F9FA; /* Light gray background */
+  color: #333; /* Darker text for better visibility */
+}
+
+.chat-message.own {
+  background-color: #DFF7DF; /* Light green background for user messages */
+  color: #2B542C; /* Dark green text for better visibility */
+}
+
+/* Username Styling */
+.chat-message strong {
+  color: #6B4C9A; /* Distinct purple for usernames */
+}
+
+/* Message Actions (Like and Delete Buttons) */
+.message-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-button {
+  border: none;
+  background: none;
+  color: #007BFF; /* Blue for likes */
+  cursor: pointer;
+  padding: 0;
+}
+
+.action-button:hover {
+  text-decoration: underline;
+}
+
+.action-button.delete {
+  color: #DC3545; /* Red for delete button */
+}
+
+/* Input Container */
+.input-container {
+  position: sticky;
+  bottom: 0;
+  background-color: #ffffff;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+/* Chat Canvas Shrinking */
+.chat-canvas {
+  height: 50vh; /* Smaller height */
+  width: 100%; /* Full width in its column */
+  overflow-y: auto; /* Scrollable */
+  background-color: #FFFFFF;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+/* Community Links Styling */
+.community-links {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.community-links ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.community-links ul li {
+  margin-bottom: 10px;
+}
+
+.community-links ul li a {
+  text-decoration: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.community-links ul li a:hover {
+  text-decoration: underline;
+}
