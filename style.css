@@ -3,6 +3,8 @@ body {
   background-color: #9A77CF;
   color: white;
   margin: 0;
+  height: 42vh; /* Ensures full height for the viewport /
+  overflow: hidden; / Prevents scrolling issues */
 }
 
 /* Sidebar Styling */
@@ -56,6 +58,7 @@ body {
   height: 100%;
   width: 100%;
 }
+
 
 /* Move container.mt-4 up */
 .container.mt-4 {
