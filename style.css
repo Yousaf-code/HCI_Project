@@ -70,3 +70,35 @@ body {
   max-width: 600px; /* Optional: Set a max width to avoid it stretching too much */
   padding-top: 20px; /* Optional: Add some padding if you need space from the top */
 }
+
+/*Notification Page*/
+.notification-tab {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: lightblue;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.notification-settings {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.form-control {
+  width: 100%;
+}
