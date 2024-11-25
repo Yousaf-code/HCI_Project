@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout Plan - HOMEFIT</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-auto">
+        <div class="sidebar">
+          <a href="profile.html" class="sidebar-item text-decoration-none text-dark">👤</a>
+          <a href="index.html" class="sidebar-item text-decoration-none text-dark">🏠</a>
+          <a href="workout-plan.html" class="sidebar-item text-decoration-none text-dark">🏋️</a>
+          <a href="community.html" class="sidebar-item text-decoration-none text-dark">🌐</a>
+          <a href="notifications.html" class="sidebar-item text-decoration-none text-dark">📅</a>
+          <a href="nutrition.html" class="sidebar-item text-decoration-none text-dark">📋</a>
+          <a href="help.html" class="sidebar-item question-mark text-decoration-none text-dark">❓</a>
+        </div>
+      </div>
+      <!-- Main Content -->
+      <div class="col">
+        <div class="container mt-2 workout-container">
+          <h1 class="text-center mb-4">Personalized Workout Plan</h1>
+          <form id="workoutForm" class="mb-4">
+            <label for="goal" class="form-label">Select Your Fitness Goal:</label>
+            <select id="goal" class="form-select mb-3" required>
+              <option value="" disabled selected>Choose your goal</option>
+              <option value="strength">Build Strength</option>
+              <option value="cardio">Improve Cardio</option>
+              <option value="flexibility">Increase Flexibility</option>
+            </select>
+            <div id="strength-options" class="mb-3" style="display: none;">
+              <label for="strength-type" class="form-label">Select Strength Type:</label>
+              <select id="strength-type" class="form-select">
+                <option value="" disabled selected>Choose strength focus</option>
+                <option value="upper-body">Upper Body Strength</option>
+                <option value="lower-body">Lower Body Strength</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Get My Workout Plan</button>
+          </form>
+          <div id="workoutResult" class="alert alert-info" style="display: none;">
+            <h2>Your Workout Plan</h2>
+            <p id="workoutDetails"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const workoutPlans = {
+      "upper-body": "Upper Body Strength Plan: 3 sets of push-ups (15 reps), 3 sets of dumbbell presses (12 reps), 3 sets of planks (hold for 30 seconds). Rest 60 seconds between sets.",
+      "lower-body": "Lower Body Strength Plan: 3 sets of squats (10 reps), 3 sets of lunges (10 reps per leg), 3 sets of calf raises (15 reps). Rest 60 seconds between sets.",
+      cardio: "Cardio Plan: 30-minute jog, 5-minute warm-up walk, and 5-minute cool-down stretch.",
+      flexibility: "Flexibility Plan: 15 minutes of yoga (focus on stretching), including downward dog, child's pose, and forward bends."
+    };
+
+    const form = document.getElementById('workoutForm');
+    const goalSelect = document.getElementById('goal');
+    const strengthOptions = document.getElementById('strength-options');
+    const strengthTypeSelect = document.getElementById('strength-type');
+    const resultDiv = document.getElementById('workoutResult');
+    const workoutDetails = document.getElementById('workoutDetails');
+
+    goalSelect.addEventListener('change', function () {
+      if (goalSelect.value === 'strength') {
+        strengthOptions.style.display = 'block';
+      } else {
+        strengthOptions.style.display = 'none';
+      }
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const goal = goalSelect.value;
+
+      if (goal === 'strength') {
+        const strengthType = strengthTypeSelect.value;
+        if (workoutPlans[strengthType]) {
+          workoutDetails.textContent = workoutPlans[strengthType];
+          resultDiv.style.display = 'block';
+        } else {
+          workoutDetails.textContent = 'Please select a specific strength focus.';
+          resultDiv.style.display = 'block';
+        }
+      } else if (workoutPlans[goal]) {
+        workoutDetails.textContent = workoutPlans[goal];
+        resultDiv.style.display = 'block';
+      } else {
+        resultDiv.style.display = 'none';
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

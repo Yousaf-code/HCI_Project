@@ -254,3 +254,8 @@ img.rounded-circle {
 .community-links ul li a:hover {
   text-decoration: underline;
 }
+
+.workout-container{
+  position: relative;
+  top: 70px; /* Moves the container down by 20px */
+}
