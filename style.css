@@ -127,6 +127,18 @@ img.rounded-circle {
   color: white;
 }
 
+/* Avatar selection */
+.selectable-avatar {
+  cursor: pointer;
+  border: 2px solid transparent; /* Default: No border */
+  transition: border 0.3s ease;
+}
+
+.selectable-avatar.selected-avatar {
+  border: 2px solid blue; /* Blue outline for the selected avatar */
+}
+
+
 /* Background Colors for Consistency */
 .bg-warning {
   background-color: #FFD54F !important;
