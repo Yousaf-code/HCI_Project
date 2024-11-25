@@ -16,7 +16,7 @@
           <a href="profile.html" class="sidebar-item text-decoration-none text-dark">👤</a>
           <a href="index.html" class="sidebar-item text-decoration-none text-dark">🏠</a>
           <a href="community.html" class="sidebar-item text-decoration-none text-dark">🌐</a>
-          <a href="notifications.html" class="sidebar-item text-decoration-none text-dark">📅</a>
+          <a href="calendar.html" class="sidebar-item text-decoration-none text-dark">📅</a>
           <a href="nutrition.html" class="sidebar-item text-decoration-none text-dark">📋</a>
           <a href="help.html" class="sidebar-item question-mark text-decoration-none text-dark">❓</a>
         </div>
@@ -114,9 +114,27 @@
       document.getElementById("food-info").classList.remove("d-none");
     }
 
+    // Clear the page content
+    function clearPage() {
+      document.getElementById("food-image").src = "";
+      document.getElementById("food-image").classList.add("d-none");
+      document.getElementById("food-name").textContent = "";
+      document.getElementById("calorie-tracker").innerHTML = "";
+      document.getElementById("calorie-tracker").classList.add("d-none");
+      document.getElementById("food-info").textContent = "";
+      document.getElementById("food-info").classList.add("d-none");
+      autocompleteList.innerHTML = "";
+    }
+
     // Handle autocomplete input
     searchInput.addEventListener("focus", () => {
       autocompleteList.innerHTML = "";
+      const clearOption = document.createElement("li");
+      clearOption.textContent = "Clear Page";
+      clearOption.classList.add("list-group-item", "list-group-item-action", "text-danger");
+      clearOption.addEventListener("click", clearPage);
+      autocompleteList.appendChild(clearOption);
+
       Object.keys(foodData).forEach(foodName => {
         const listItem = document.createElement("li");
         listItem.textContent = foodName;
