@@ -38,10 +38,6 @@
                   <input type="checkbox" id="show-alert">
                   <label for="show-alert">Show Visual Alert</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="desktop-notification">
-                  <label for="desktop-notification">Desktop Notification</label>
-                </div>
               </div>
               <button class="btn btn-primary mt-3" onclick="triggerNotification()">Test Notification</button>
             </div>
@@ -71,64 +67,50 @@
       </div>
 
 <script>
-// Check for Notification API support
-if ("Notification" in window) {
-  Notification.requestPermission();
-}
-
-// Trigger notification
-function triggerNotification() {
-  // Check which settings are enabled
-  const playSound = document.getElementById("sound").checked;
-  const showAlert = document.getElementById("show-alert").checked;
-  const desktopNotification = document.getElementById("desktop-notification").checked;
-
-  // 1. Play sound
-  if (playSound) {
-    const audio = new Audio("sound_notification.mp3"); // Use your custom sound file
-    audio.play();
+  // Trigger notification
+  function triggerNotification() {
+    // Check which settings are enabled
+    const playSound = document.getElementById("sound").checked;
+    const showAlert = document.getElementById("show-alert").checked;
+  
+    // 1. Play sound
+    if (playSound) {
+      const audio = new Audio("sound_notification.mp3"); // Use your custom sound file
+      audio.play();
+    }
+  
+    // 2. Show visual alert
+    if (showAlert) {
+      const alertBox = document.createElement("div");
+      alertBox.textContent = "🔔 Visual Alert!";
+      alertBox.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #6B4C9A;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        animation: fadeInOut 3s ease-in-out;
+      `;
+      document.body.appendChild(alertBox);
+  
+      // Remove alert after 3 seconds
+      setTimeout(() => alertBox.remove(), 3000);
+    }
   }
-
-  // 2. Show visual alert
-  if (showAlert) {
-    const alertBox = document.createElement("div");
-    alertBox.textContent = "🔔 Visual Alert!";
-    alertBox.style.cssText = `
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #6B4C9A;
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      animation: fadeInOut 3s ease-in-out;
-    `;
-    document.body.appendChild(alertBox);
-
-    // Remove alert after 3 seconds
-    setTimeout(() => alertBox.remove(), 3000);
-  }
-
-  // 3. Trigger desktop notification
-  if (desktopNotification && Notification.permission === "granted") {
-    new Notification("🔔 Desktop Notification", {
-      body: "This is a test notification.",
-      icon: "alert.png", // Optional: use your own icon
-    });
-  }
-}
-
-// Visual Alert Animation
-const styleSheet = document.createElement("style");
-styleSheet.textContent = `
-  @keyframes fadeInOut {
-    0% { opacity: 0; transform: translateY(-20px); }
-    10%, 90% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-20px); }
-  }
-`;
-document.head.appendChild(styleSheet);
+  
+  // Visual Alert Animation
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = `
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateY(-20px); }
+      10%, 90% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-20px); }
+    }
+  `;
+  document.head.appendChild(styleSheet);
 </script>
 
 </body>
