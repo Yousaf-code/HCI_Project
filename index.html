@@ -26,8 +26,9 @@
       <!-- Main Content -->
       <div class="col">
         <!-- Search Input -->
-        <div class="my-3" style="width: 80%;">
-          <input type="text" class="form-control" placeholder="Search" />
+        <div class="my-3" style="width: 80%; position: relative;">
+          <input type="text" id="search-input" class="form-control" placeholder="Search" autocomplete="off" />
+          <ul id="search-suggestions" class="list-group position-absolute" style="width: 100%; z-index: 1000; display: none;"></ul>
         </div>
         
         <!-- Video Area -->
@@ -38,7 +39,7 @@
               width="100%" 
               height="100%" 
               src="https://www.youtube.com/embed/cbKkB3POqaY" 
-              title="YouTube video player" 
+              title="Full Body Workout" 
               frameborder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowfullscreen>
@@ -49,59 +50,76 @@
       <!-- Bookmarked Videos -->
       <h5>Bookmarked Videos</h5>
       <div id="bookmarked-videos" class="d-flex justify-content-between" style="height: 30%; width: 80%;">
-        <!-- First Thumbnail -->
         <div class="video-card w-100 me-2">
           <img 
             class="bookmark-video" 
             data-video-src="https://www.youtube.com/embed/g_tea8ZNk5A"
             src="https://img.youtube.com/vi/g_tea8ZNk5A/hqdefault.jpg" 
             class="img-fluid" 
-            alt="Workout Thumbnail">
+            alt="Yoga">
         </div>
-        <!-- Second Thumbnail -->
         <div class="video-card w-100 me-2">
           <img 
             class="bookmark-video" 
             data-video-src="https://www.youtube.com/embed/OcDhmXXgi8Q" 
             src="https://img.youtube.com/vi/OcDhmXXgi8Q/hqdefault.jpg" 
             class="img-fluid" 
-            alt="Workout Thumbnail">
+            alt="Upper Body Workout">
         </div>
-        <!-- Third Thumbnail -->
         <div class="video-card w-100">
           <img 
             class="bookmark-video" 
             data-video-src="https://www.youtube.com/embed/X0xt0fYTZv8" 
             src="https://img.youtube.com/vi/X0xt0fYTZv8/hqdefault.jpg" 
             class="img-fluid" 
-            alt="Workout Thumbnail">
+            alt="Lower Body Workout">
         </div>
       </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-  // Swap video functionality
-  const bookmarkedVideos = document.querySelectorAll('.bookmark-video');
-  const mainVideo = document.getElementById('main-video');
+    const videos = [
+      { title: "Full Body Workout", url: "https://www.youtube.com/embed/cbKkB3POqaY" },
+      { title: "Yoga", url: "https://www.youtube.com/embed/g_tea8ZNk5A" },
+      { title: "Upper Body Workout", url: "https://www.youtube.com/embed/OcDhmXXgi8Q" },
+      { title: "Lower Body Workout", url: "https://www.youtube.com/embed/X0xt0fYTZv8" }
+    ];
 
-  bookmarkedVideos.forEach(thumbnail => {
-    thumbnail.addEventListener('click', () => {
-      // Get the new video source and the current main video source
-      const newVideoSrc = thumbnail.getAttribute('data-video-src');
-      const currentVideoSrc = mainVideo.getAttribute('src');
+    const searchInput = document.getElementById("search-input");
+    const searchSuggestions = document.getElementById("search-suggestions");
+    const mainVideo = document.getElementById("main-video");
 
-      // Swap the video sources
-      mainVideo.setAttribute('src', newVideoSrc);
-      thumbnail.setAttribute('data-video-src', currentVideoSrc);
+    // Update video player
+    function updateVideo(url) {
+      mainVideo.setAttribute("src", url);
+    }
 
-      // Update the thumbnail image to match the new video
-      const newThumbnailSrc = `https://img.youtube.com/vi/${newVideoSrc.split('/embed/')[1]}/hqdefault.jpg`;
-      const currentThumbnailSrc = thumbnail.getAttribute('src');
+    // Show suggestions as the user types
+    searchInput.addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase();
+      searchSuggestions.innerHTML = ""; // Clear previous suggestions
+      searchSuggestions.style.display = query ? "block" : "none";
 
-      // Swap the thumbnail sources
-      thumbnail.setAttribute('src', `https://img.youtube.com/vi/${currentVideoSrc.split('/embed/')[1]}/hqdefault.jpg`);
+      const filteredVideos = videos.filter(video => video.title.toLowerCase().includes(query));
+      filteredVideos.forEach(video => {
+        const li = document.createElement("li");
+        li.className = "list-group-item list-group-item-action";
+        li.textContent = video.title;
+        li.addEventListener("click", () => {
+          updateVideo(video.url);
+          searchSuggestions.style.display = "none";
+          searchInput.value = video.title;
+        });
+        searchSuggestions.appendChild(li);
+      });
     });
-  });
+
+    // Hide suggestions on click outside
+    document.addEventListener("click", (e) => {
+      if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+        searchSuggestions.style.display = "none";
+      }
+    });
   </script>
 </body>
 </html>
