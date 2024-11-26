@@ -255,7 +255,6 @@ img.rounded-circle {
   text-decoration: underline;
 }
 
-.workout-container{
-  position: relative;
-  top: 70px; /* Moves the container down by 20px */
+.workout-plan{
+  padding-top: 50px;
 }
