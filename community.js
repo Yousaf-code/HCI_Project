@@ -132,13 +132,21 @@ const communityChats = {
   }
   
   // Function to load a different community
+   // Function to load a different community
   function loadCommunity(communityName) {
     currentCommunity = communityName;
     messages = communityChats[currentCommunity].messages;
     fakeUsers = communityChats[currentCommunity].fakeUsers;
-  
+
+      // Update the community tab title
+    const communityTabTitle = document.getElementById("community-tab-title");
+    communityTabTitle.textContent = currentCommunity;
+
+    // Render the community messages
     renderMessages();
   }
+
+
   
   // Function to simulate fake users sending messages
   function simulateFakeMessages() {

@@ -24,48 +24,48 @@
       </div>
 
       <!-- Main Content -->
-      <div class="col">
-        <h1 class="text-center mt-3">Community</h1>
-        <div class="row">
-          <!-- Community Chat Section -->
-          <div class="col-md-8">
-            <h2>Community Tab</h2>
-            <div id="chat-canvas" class="chat-canvas">
-              <!-- Messages will be dynamically rendered here -->
-            </div>
-            <div class="input-container d-flex">
-              <input type="text" id="chat-input" class="form-control me-2" placeholder="Type your message...">
-              <button id="send-button" class="btn btn-primary">Send</button>
-            </div>
-          </div>
+<div class="col">
+  <h1 class="text-center mt-3" id="community-title">Community</h1>
+  <div class="row">
+    <!-- Community Chat Section -->
+  <div class="col-md-8">
+    <h2 id="community-tab-title">Community Tab</h2> <!-- Dynamic community tab title -->
+    <div id="chat-canvas" class="chat-canvas">
+      <!-- Messages will be dynamically rendered here -->
+    </div>
+    <div class="input-container d-flex">
+      <input type="text" id="chat-input" class="form-control me-2" placeholder="Type your message...">
+      <button id="send-button" class="btn btn-primary">Send</button>
+  </div>
+</div>
 
-          <!-- Community Links Section -->
-          <div class="col-md-4">
-            <h2>Community Links</h2>
-            <div id="community-links" class="community-links">
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <a href="#" onclick="loadCommunity('Workout Tips')">Workout Tips</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="#" onclick="loadCommunity('Yoga Enthusiasts')">Yoga Enthusiasts</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="#" onclick="loadCommunity('Healthy Eating')">Healthy Eating</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="#" onclick="loadCommunity('10K Step Challenge')">10K Step Challenge</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="#" onclick="loadCommunity('Hydration Hacks')">Hydration Hacks</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+
+    <!-- Community Links Section -->
+    <div class="col-md-4">
+      <h2>Community Links</h2>
+      <div id="community-links" class="community-links">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href="#" onclick="loadCommunity('Workout Tips')">Workout Tips</a>
+          </li>
+          <li class="list-group-item">
+            <a href="#" onclick="loadCommunity('Yoga Enthusiasts')">Yoga Enthusiasts</a>
+          </li>
+          <li class="list-group-item">
+            <a href="#" onclick="loadCommunity('Healthy Eating')">Healthy Eating</a>
+          </li>
+          <li class="list-group-item">
+            <a href="#" onclick="loadCommunity('10K Step Challenge')">10K Step Challenge</a>
+          </li>
+          <li class="list-group-item">
+            <a href="#" onclick="loadCommunity('Hydration Hacks')">Hydration Hacks</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
+</div>
+
 
   <script src="community.js"></script>
 </body>
