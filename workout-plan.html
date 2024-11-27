@@ -27,7 +27,6 @@
       <div class="col main-content workout-plan">
         <div class="row">
           <!-- Left Column: Personalized Workout Plans -->
-        
           <div class="col-md-6 border-end">
             <h1 class="text-center mb-4">Personalized Workout Plans</h1>
             <form id="workoutForm" class="mb-4">
@@ -92,39 +91,38 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Workout Plans Logic
-    const workoutPlans = {
-      "upper-body": "Upper Body Strength Plan: 3 sets of push-ups (15 reps), 3 sets of dumbbell presses (12 reps), 3 sets of planks (hold for 30 seconds). Rest 60 seconds between sets.",
-      "lower-body": "Lower Body Strength Plan: 3 sets of squats (10 reps), 3 sets of lunges (10 reps per leg), 3 sets of calf raises (15 reps). Rest 60 seconds between sets.",
-      cardio: "Cardio Plan: 30-minute jog, 5-minute warm-up walk, and 5-minute cool-down stretch.",
-      flexibility: "Flexibility Plan: 15 minutes of yoga (focus on stretching), including downward dog, child's pose, and forward bends."
-    };
-
-    document.getElementById('goal').addEventListener('change', function () {
-      const strengthOptions = document.getElementById('strength-options');
-      strengthOptions.style.display = this.value === 'strength' ? 'block' : 'none';
-    });
-
-    document.getElementById('workoutForm').addEventListener('submit', function (event) {
-      event.preventDefault();
-      const goal = document.getElementById('goal').value;
-      const strengthType = document.getElementById('strength-type').value;
-      const resultDiv = document.getElementById('workoutResult');
-      const workoutDetails = document.getElementById('workoutDetails');
-
-      if (goal === 'strength' && strengthType) {
-        workoutDetails.textContent = workoutPlans[strengthType];
-      } else if (workoutPlans[goal]) {
-        workoutDetails.textContent = workoutPlans[goal];
-      } else {
-        workoutDetails.textContent = 'Please select a valid option.';
-      }
-      resultDiv.style.display = 'block';
-    });
-
-    // Progress Tracking Logic
     const progressData = [];
     const feedbackThreshold = 5;
+
+   
+    function saveProgressToLocalStorage() {
+      localStorage.setItem('progressData', JSON.stringify(progressData));
+    }
+
+  
+    function loadProgressFromLocalStorage() {
+      const savedProgress = localStorage.getItem('progressData');
+      if (savedProgress) {
+        const loadedData = JSON.parse(savedProgress);
+        loadedData.forEach(logEntry => {
+          progressData.push(logEntry);
+
+          const progressList = document.getElementById('progressList');
+          const listItem = document.createElement('li');
+          listItem.className = 'list-group-item text-dark';
+          listItem.textContent = `${logEntry.date} - ${logEntry.workoutType}: ${logEntry.metrics}`;
+          progressList.appendChild(listItem);
+        });
+
+        if (progressData.length >= feedbackThreshold) {
+          const feedbackMessage = document.getElementById('feedbackMessage');
+          feedbackMessage.textContent = "Great job! Consider increasing intensity or trying new exercises.";
+          document.getElementById('feedbackSection').style.display = 'block';
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProgressFromLocalStorage);
 
     document.getElementById('progressForm').addEventListener('submit', function (event) {
       event.preventDefault();
@@ -139,6 +137,8 @@
       listItem.className = 'list-group-item text-dark';
       listItem.textContent = `${logEntry.date} - ${logEntry.workoutType}: ${logEntry.metrics}`;
       progressList.appendChild(listItem);
+
+      saveProgressToLocalStorage();
 
       if (progressData.length >= feedbackThreshold) {
         const feedbackMessage = document.getElementById('feedbackMessage');

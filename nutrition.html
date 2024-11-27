@@ -48,27 +48,33 @@
           <div class="col-md-6">
             <div class="nutrition-section bg-info text-center p-4">
               <h5>Calorie Tracker</h5>
-              <ul id="calorie-tracker" class="list-unstyled mt-3 d-none">
+              <ul id="calorie-tracker" class="list-unstyled mt-3">
+                <!-- Tracked food items will be dynamically inserted here -->
               </ul>
+              <button id="clear-tracker" class="btn btn-danger mt-2">Clear Tracker</button>
             </div>
           </div>
         </div>
 
         <!-- Food Information -->
-        <div class="row mt-4">
-          <div class="col">
-            <div class="nutrition-section bg-primary text-center p-4">
-              <h5>Food Information</h5>
-              <p id="food-info" class="mt-3 d-none"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+          <div class="row mt-4">
+            <div class="col">
+             <div class="nutrition-section bg-primary text-center p-4">
+               <h5>Food Information</h5>
+               <p id="food-info" class="mt-3 d-none"></p>
+              <ul id="food-details" class="list-unstyled d-none mt-3">
+                <li id="food-calories"></li>
+                 <li id="food-proteins"></li>
+                  <li id="food-carbohydrates"></li>
+                   <li id="food-fats"></li>
+                 </ul>
+               <button id="add-to-tracker" class="btn btn-success mt-3 d-none">Add to Tracker</button>
+             </div>
+           </div>
+         </div>
+      
 
   <script>
-    // Premade food data
     const foodData = {
       "Grilled Chicken": {
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_7mct1A792qL8zopviKQXLsZdtNxOf28HFw&s",
@@ -98,44 +104,77 @@
 
     const searchInput = document.getElementById("food-search");
     const autocompleteList = document.getElementById("autocomplete-list");
+    const calorieTracker = document.getElementById("calorie-tracker");
+    const addToTrackerButton = document.getElementById("add-to-tracker");
+    const clearTrackerButton = document.getElementById("clear-tracker");
 
-    // Update the page with selected food data
+    let selectedFood = null;
+
     function updateFoodInfo(food) {
-      document.getElementById("food-image").src = food.image;
-      document.getElementById("food-image").classList.remove("d-none");
-      document.getElementById("food-name").textContent = food.name;
-      document.getElementById("calorie-tracker").innerHTML = `
-        <li>Calories: ${food.calories}</li>
-        <li>Proteins: ${food.proteins}</li>
-        <li>Carbohydrates: ${food.carbohydrates}</li>
-        <li>Fats: ${food.fats}</li>
-      `;
-      document.getElementById("calorie-tracker").classList.remove("d-none");
-      document.getElementById("food-info").textContent = food.info;
-      document.getElementById("food-info").classList.remove("d-none");
+  selectedFood = { name: food.name, calories: food.calories };
+
+  // Update food image and name
+  document.getElementById("food-image").src = food.image;
+  document.getElementById("food-image").classList.remove("d-none");
+  document.getElementById("food-name").textContent = food.name;
+
+  // Update food information text
+  document.getElementById("food-info").textContent = food.info;
+  document.getElementById("food-info").classList.remove("d-none");
+
+  // Update food details (calories, proteins, etc.)
+  document.getElementById("food-calories").textContent = `Calories: ${food.calories}`;
+  document.getElementById("food-proteins").textContent = `Proteins: ${food.proteins}`;
+  document.getElementById("food-carbohydrates").textContent = `Carbohydrates: ${food.carbohydrates}`;
+  document.getElementById("food-fats").textContent = `Fats: ${food.fats}`;
+  document.getElementById("food-details").classList.remove("d-none");
+
+  // Show the "Add to Tracker" button
+  addToTrackerButton.classList.remove("d-none");
+}
+
+
+    function getTrackerData() {
+      return JSON.parse(localStorage.getItem("calorieTracker")) || [];
     }
 
-    // Clear the page content
-    function clearPage() {
-      document.getElementById("food-image").src = "";
-      document.getElementById("food-image").classList.add("d-none");
-      document.getElementById("food-name").textContent = "";
-      document.getElementById("calorie-tracker").innerHTML = "";
-      document.getElementById("calorie-tracker").classList.add("d-none");
-      document.getElementById("food-info").textContent = "";
-      document.getElementById("food-info").classList.add("d-none");
-      autocompleteList.innerHTML = "";
+    function saveTrackerData(data) {
+      localStorage.setItem("calorieTracker", JSON.stringify(data));
     }
 
-    // Handle autocomplete input
+    function renderTracker() {
+      const trackerData = getTrackerData();
+      calorieTracker.innerHTML = "";
+      if (trackerData.length === 0) {
+        calorieTracker.innerHTML = '<li class="text-muted">No items in tracker</li>';
+        return;
+      }
+      trackerData.forEach(item => {
+        const listItem = document.createElement("li");
+        listItem.className = "list-group-item";
+        listItem.textContent = `${item.name} - ${item.calories}`;
+        calorieTracker.appendChild(listItem);
+      });
+    }
+
+    addToTrackerButton.addEventListener("click", () => {
+      if (selectedFood) {
+        const trackerData = getTrackerData();
+        trackerData.push(selectedFood);
+        saveTrackerData(trackerData);
+        renderTracker();
+      }
+    });
+
+    clearTrackerButton.addEventListener("click", () => {
+      localStorage.removeItem("calorieTracker");
+      renderTracker();
+    });
+
+    document.addEventListener("DOMContentLoaded", renderTracker);
+
     searchInput.addEventListener("focus", () => {
       autocompleteList.innerHTML = "";
-      const clearOption = document.createElement("li");
-      clearOption.textContent = "Clear Page";
-      clearOption.classList.add("list-group-item", "list-group-item-action", "text-danger");
-      clearOption.addEventListener("click", clearPage);
-      autocompleteList.appendChild(clearOption);
-
       Object.keys(foodData).forEach(foodName => {
         const listItem = document.createElement("li");
         listItem.textContent = foodName;
@@ -149,7 +188,6 @@
       });
     });
 
-    // Close autocomplete on outside click
     document.addEventListener("click", (e) => {
       if (e.target !== searchInput) {
         autocompleteList.innerHTML = "";
