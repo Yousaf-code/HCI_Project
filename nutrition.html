@@ -10,7 +10,8 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <!-- Sidebar -->
+      
+      <!--Sidebar Section-->
       <div class="col-auto">
         <div class="sidebar">
           <a href="profile.html" class="sidebar-item text-decoration-none text-dark">👤</a>
@@ -23,19 +24,18 @@
         </div>
       </div>
 
-      <!-- Main Content -->
       <div class="col">
+        <!--Title of screen-->
         <h1 class="my-4">Nutrition Tab</h1>
 
-        <!-- Search Bar -->
+        <!-- Create a search bar -->
         <div class="mb-4 position-relative">
           <input id="food-search" type="text" class="form-control" placeholder="Search for food items..." autocomplete="off" />
           <ul id="autocomplete-list" class="list-group position-absolute w-100" style="z-index: 1000;"></ul>
         </div>
 
-        <!-- Content Layout -->
         <div class="row">
-          <!-- Food Image -->
+          <!-- Make image of food appear -->
           <div class="col-md-6">
             <div class="nutrition-section bg-warning text-center p-4">
               <h5>Food Image</h5>
@@ -44,19 +44,19 @@
             </div>
           </div>
 
-          <!-- Calorie Tracker -->
+          <!-- Show the calorie tracker -->
           <div class="col-md-6">
             <div class="nutrition-section bg-info text-center p-4">
               <h5>Calorie Tracker</h5>
               <ul id="calorie-tracker" class="list-unstyled mt-3">
-                <!-- Tracked food items will be dynamically inserted here -->
+                <!-- Food items will be put here-->
               </ul>
               <button id="clear-tracker" class="btn btn-danger mt-2">Clear Tracker</button>
             </div>
           </div>
         </div>
 
-        <!-- Food Information -->
+        <!-- Show the information of the food -->
           <div class="row mt-4">
             <div class="col">
              <div class="nutrition-section bg-primary text-center p-4">
@@ -75,6 +75,7 @@
       
 
   <script>
+    //Dictionary for the Food data
     const foodData = {
       "Grilled Chicken": {
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_7mct1A792qL8zopviKQXLsZdtNxOf28HFw&s",
@@ -102,6 +103,7 @@
       }
     };
 
+    //Get the information of the food
     const searchInput = document.getElementById("food-search");
     const autocompleteList = document.getElementById("autocomplete-list");
     const calorieTracker = document.getElementById("calorie-tracker");
@@ -110,38 +112,41 @@
 
     let selectedFood = null;
 
+    //Function to update the food information
     function updateFoodInfo(food) {
-  selectedFood = { name: food.name, calories: food.calories };
+      selectedFood = { name: food.name, calories: food.calories };
 
-  // Update food image and name
-  document.getElementById("food-image").src = food.image;
-  document.getElementById("food-image").classList.remove("d-none");
-  document.getElementById("food-name").textContent = food.name;
+      //This will update the image of the food and it's name
+      document.getElementById("food-image").src = food.image;
+      document.getElementById("food-image").classList.remove("d-none");
+      document.getElementById("food-name").textContent = food.name;
 
-  // Update food information text
-  document.getElementById("food-info").textContent = food.info;
-  document.getElementById("food-info").classList.remove("d-none");
+      //This will update the information of the food
+      document.getElementById("food-info").textContent = food.info;
+      document.getElementById("food-info").classList.remove("d-none");
 
-  // Update food details (calories, proteins, etc.)
-  document.getElementById("food-calories").textContent = `Calories: ${food.calories}`;
-  document.getElementById("food-proteins").textContent = `Proteins: ${food.proteins}`;
-  document.getElementById("food-carbohydrates").textContent = `Carbohydrates: ${food.carbohydrates}`;
-  document.getElementById("food-fats").textContent = `Fats: ${food.fats}`;
-  document.getElementById("food-details").classList.remove("d-none");
+      //This will update the details of the food such as calories, proteins, carbohydrates, and fats
+      document.getElementById("food-calories").textContent = `Calories: ${food.calories}`;
+      document.getElementById("food-proteins").textContent = `Proteins: ${food.proteins}`;
+      document.getElementById("food-carbohydrates").textContent = `Carbohydrates: ${food.carbohydrates}`;
+      document.getElementById("food-fats").textContent = `Fats: ${food.fats}`;
+      document.getElementById("food-details").classList.remove("d-none");
 
-  // Show the "Add to Tracker" button
-  addToTrackerButton.classList.remove("d-none");
-}
+      //DIsplay button
+      addToTrackerButton.classList.remove("d-none");
+    }
 
-
+    //Function to get the food data
     function getTrackerData() {
       return JSON.parse(localStorage.getItem("calorieTracker")) || [];
     }
 
+    //Function to save the tracker data
     function saveTrackerData(data) {
       localStorage.setItem("calorieTracker", JSON.stringify(data));
     }
 
+    //Display the calorie tracker
     function renderTracker() {
       const trackerData = getTrackerData();
       calorieTracker.innerHTML = "";
@@ -157,6 +162,7 @@
       });
     }
 
+    //Add the food to the calorie tracker
     addToTrackerButton.addEventListener("click", () => {
       if (selectedFood) {
         const trackerData = getTrackerData();
@@ -166,6 +172,7 @@
       }
     });
 
+    //Clear the calorie tracker
     clearTrackerButton.addEventListener("click", () => {
       localStorage.removeItem("calorieTracker");
       renderTracker();
@@ -173,6 +180,7 @@
 
     document.addEventListener("DOMContentLoaded", renderTracker);
 
+    //Do autocomplete for the search bar
     searchInput.addEventListener("focus", () => {
       autocompleteList.innerHTML = "";
       Object.keys(foodData).forEach(foodName => {
@@ -188,6 +196,7 @@
       });
     });
 
+    //Remove autocomplete list when a click is made outside the search bar
     document.addEventListener("click", (e) => {
       if (e.target !== searchInput) {
         autocompleteList.innerHTML = "";

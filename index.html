@@ -10,7 +10,8 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <!-- Sidebar -->
+      
+      <!--Sidebar Section-->
       <div class="col-auto">
         <div class="sidebar">
           <a href="profile.html" class="sidebar-item text-decoration-none text-dark">👤</a>
@@ -23,17 +24,16 @@
         </div>
       </div>
 
-      <!-- Main Content -->
       <div class="col d-flex">
-        <!-- Left Side: Video Area -->
         <div class="flex-grow-1">
-          <!-- Search Bar -->
+          
+          <!-- Create a search bar -->
           <div class="my-3 position-relative" style="width: 80%; left: 10%; position: relative;">
             <input id="video-search" type="text" class="form-control" placeholder="Search for videos..." autocomplete="off">
             <ul id="video-autocomplete-list" class="list-group position-absolute w-100" style="z-index: 1000;"></ul>
           </div>
 
-          <!-- Video Area -->
+          <!-- Create the area for the video to be shown and put the video there -->
           <div id="video-area" class="bg-light mb-3 p-3" style="height: 60%; width: 80%; left: 10%; position: relative;">
             <div class="d-flex justify-content-center align-items-center h-100">
               <iframe 
@@ -49,10 +49,10 @@
             </div>
           </div>
 
-          <!-- Bookmarked Videos -->
-          <h5>Bookmarked Videos</h5>
+          <!-- Section for showing the videos -->
+          <h5>Videos</h5>
           <div id="bookmarked-videos" class="d-flex justify-content-between" style="height: 30%; width: 100%;">
-            <!-- First Thumbnail -->
+            <!-- Thumbnail for Video 1 -->
             <div class="video-card w-100 me-2">
               <img 
                 class="bookmark-video" 
@@ -61,7 +61,7 @@
                 class="img-fluid" 
                 alt="Workout Thumbnail">
             </div>
-            <!-- Second Thumbnail -->
+           <!-- Thumbnail for Video 2 -->
             <div class="video-card w-100 me-2">
               <img 
                 class="bookmark-video" 
@@ -70,7 +70,7 @@
                 class="img-fluid" 
                 alt="Workout Thumbnail">
             </div>
-            <!-- Third Thumbnail -->
+            <!-- Thumbnail for Video 3 -->
             <div class="video-card w-100">
               <img 
                 class="bookmark-video" 
@@ -82,11 +82,11 @@
           </div>
         </div>
 
-        <!-- Right Side: Recent Progress -->
+        <!-- Show the recent workout the user has done-->
         <div class="flex-shrink-0 ms-3" style="width: 25%; top: 10%; position: relative; ">
           <h5>Recent Workout Progress</h5>
           <ul id="recent-progress" class="list-group">
-            <!-- Recent progress items will be dynamically populated here -->
+            <!-- Show the recent progress -->
           </ul>
         </div>
         </div>
@@ -101,6 +101,7 @@
     const bookmarkedVideos = document.querySelectorAll('.bookmark-video');
     const mainVideo = document.getElementById('main-video');
 
+    //Switch video being played with the thumbnail
     bookmarkedVideos.forEach(thumbnail => {
       thumbnail.addEventListener('click', () => {
         const newVideoSrc = thumbnail.getAttribute('data-video-src');
@@ -111,6 +112,7 @@
       });
     });
 
+    //Dictionary of videos
     const videoData = {
       "Full-Body Workout": {
         videoSrc: "https://www.youtube.com/embed/cbKkB3POqaY",
@@ -134,12 +136,14 @@
     const videoAutocompleteList = document.getElementById("video-autocomplete-list");
     const mainVideoElement = document.getElementById("main-video");
 
+    //Update main video
     function updateMainVideo(video) {
       mainVideoElement.src = video.videoSrc;
       videoAutocompleteList.innerHTML = "";
       videoSearchInput.value = "";
     }
 
+    //Do autocomplete for the search bar
     videoSearchInput.addEventListener("focus", () => {
       videoAutocompleteList.innerHTML = "";
       Object.keys(videoData).forEach(videoTitle => {
@@ -151,18 +155,20 @@
       });
     });
 
+    //Remove autocomplete list when a click is made outside the search bar
     document.addEventListener("click", (e) => {
       if (e.target !== videoSearchInput) {
         videoAutocompleteList.innerHTML = "";
       }
     });
 
-    // Recent Progress Tracking
+    //Get the recent progress
     function getRecentProgress() {
       const progressData = JSON.parse(localStorage.getItem('progressData')) || [];
       return progressData.slice(-5).reverse();
     }
 
+    //Show the recent progress
     function renderRecentProgress() {
       const progressList = document.getElementById('recent-progress');
       progressList.innerHTML = "";
@@ -182,8 +188,6 @@
         listItem.textContent = `${entry.date} - ${entry.workoutType}: ${entry.metrics}`;
         progressList.appendChild(listItem);
       });
-
-      
 
     }
 
