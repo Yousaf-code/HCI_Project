@@ -132,7 +132,6 @@ const communityChats = {
   }
   
   // Function to load a different community
-   // Function to load a different community
   function loadCommunity(communityName) {
     currentCommunity = communityName;
     messages = communityChats[currentCommunity].messages;
