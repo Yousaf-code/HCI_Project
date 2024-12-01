@@ -68,19 +68,19 @@
       </div>
 
 <script>
-  // Trigger notification
+  //Trigger notification
   function triggerNotification() {
-    // Check which settings are enabled
+
     const playSound = document.getElementById("sound").checked;
     const showAlert = document.getElementById("show-alert").checked;
   
-    // 1. Play sound
+    //play sound
     if (playSound) {
-      const audio = new Audio("sound_notification.mp3"); // Use your custom sound file
+      const audio = new Audio("sound_notification.mp3"); 
       audio.play();
     }
   
-    // 2. Show visual alert
+    // visual alert
     if (showAlert) {
       const alertBox = document.createElement("div");
       alertBox.textContent = "🔔 Visual Alert!";
@@ -97,12 +97,12 @@
       `;
       document.body.appendChild(alertBox);
   
-      // Remove alert after 3 seconds
+      //timeout after 3 seconds
       setTimeout(() => alertBox.remove(), 3000);
     }
   }
   
-  // Visual Alert Animation
+  //animation for visual alert
   const styleSheet = document.createElement("style");
   styleSheet.textContent = `
     @keyframes fadeInOut {

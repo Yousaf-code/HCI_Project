@@ -3,8 +3,7 @@ body {
   background-color: #9A77CF;
   color: white;
   margin: 0;
-  height: 42vh; /* Ensures full height for the viewport /
-  overflow: hidden; / Prevents scrolling issues */
+  height: 42vh; 
 }
 
 /* Sidebar Styling */
@@ -50,7 +49,7 @@ body {
 .video-card {
   background-color: #352b3e;
   border-radius: 1% ;
-  overflow: hidden; /* Ensures thumbnails fit perfectly */
+  overflow: hidden; 
 }
 
 .video-card img {
@@ -60,7 +59,6 @@ body {
 }
 
 
-/* Move container.mt-4 up */
 .container.mt-4 {
   position: absolute;
   top: 60%; 
@@ -71,7 +69,7 @@ body {
   padding-top: 20px; 
 }
 
-/*Notification Page*/
+/*Notifications */
 .notification-tab {
   max-width: 600px;
   margin: 50px auto;
@@ -103,13 +101,13 @@ body {
   width: 100%;
 }
 
-/* Avatar Styling */
+
 img.rounded-circle {
   border: 3px solid white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Card Customization */
+
 .card {
   max-width: 600px;
   margin: 0 auto;
@@ -120,14 +118,14 @@ img.rounded-circle {
     position: relative;
     top: 20px; 
 }
-/* Nutrition Page Customizations */
+
 .nutrition-section {
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   color: white;
 }
 
-/* Avatar selection */
+/*avatar*/
 .selectable-avatar {
   cursor: pointer;
   border: 2px solid transparent; 
@@ -139,7 +137,7 @@ img.rounded-circle {
 }
 
 
-/* Background Colors for Consistency */
+/* Background Colors */
 .bg-warning {
   background-color: #FFD54F !important;
 }
@@ -153,8 +151,8 @@ img.rounded-circle {
 }
 /* Chat Canvas Styling */
 .chat-canvas {
-  height: 70vh; /* Takes most of the viewport */
-  overflow-y: auto; /* Scrollable */
+  height: 70vh; 
+  overflow-y: auto;
   background-color: #FFFFFF; 
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -162,7 +160,6 @@ img.rounded-circle {
   margin-bottom: 15px;
 }
 
-/* Individual Chat Message */
 .chat-message {
   display: flex;
   justify-content: space-between;
@@ -180,21 +177,21 @@ img.rounded-circle {
   color: #2B542C; 
 }
 
-/* Username Styling */
+/* Username */
 .chat-message strong {
-  color: #6B4C9A; /* Distinct purple for usernames */
+  color: #6B4C9A; 
 }
 
-/* Message Actions (Like and Delete Buttons) */
 .message-actions {
   display: flex;
   gap: 10px;
 }
 
+/*action  buttons*/
 .action-button {
   border: none;
   background: none;
-  color: #007BFF; /* Blue for likes */
+  color: #007BFF;
   cursor: pointer;
   padding: 0;
 }
@@ -204,7 +201,7 @@ img.rounded-circle {
 }
 
 .action-button.delete {
-  color: #DC3545; /* Red for delete button */
+  color: #DC3545; 
 }
 
 /* Input Container */
@@ -215,7 +212,7 @@ img.rounded-circle {
   padding: 10px;
   border-top: 1px solid #ddd;
 }
-/* Chat Canvas Shrinking */
+/* Chat */
 .chat-canvas {
   height: 50vh; 
   width: 100%; 
